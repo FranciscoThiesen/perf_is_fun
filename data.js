@@ -47,7 +47,7 @@ window.ROADMAP = {
       links: [
         ["Making Deep Learning Go Brrrr — Horace He", "https://horace.io/brrr_intro.html"],
         ["GPU MODE — YouTube", "https://www.youtube.com/@GPUMODE"],
-        ["PMPP, 4th ed. (reference)", "https://www.sciencedirect.com/book/9780323912310/programming-massively-parallel-processors"],
+        ["PMPP, 4th ed. — CUDA-taught, universal concepts (reference)", "https://www.sciencedirect.com/book/9780323912310/programming-massively-parallel-processors"],
       ],
       skills: [
         {
@@ -82,15 +82,15 @@ window.ROADMAP = {
           id: "m1-exec",
           title: "Execution Model & Specs",
           items: [
-            "Internalize one GPU spec sheet (H100: BF16 FLOPs, HBM BW, SRAM, NVLink)",
-            "Internalize one TPU spec sheet",
-            "Hopper whitepaper: TMA, warp specialization, async copy, tensor-core shapes",
-            "Blackwell page: FP4, what changed after Hopper",
+            "Internalize one GPU spec sheet (e.g. H100: BF16 FLOPs, HBM BW, SRAM, interconnect)",
+            "Internalize one TPU spec sheet (e.g. v5e/v6e: FLOPs, HBM BW, VMEM, ICI bandwidth)",
+            "Name the building blocks modern accelerators share: matrix/tensor units, async copy/DMA, on-chip SRAM, fast interconnect",
+            "Read one vendor architecture deep-dive end to end (the Hopper whitepaper is excellent: TMA, warp specialization, async copy, tensor-core shapes)",
             "Write a C program measuring achieved memory bandwidth vs theoretical",
           ],
           links: [
-            ["Hopper architecture whitepaper", "https://resources.nvidia.com/en-us-tensor-core"],
-            ["Blackwell architecture page", "https://resources.nvidia.com/en-us-blackwell-architecture"],
+            ["TPU system architecture (Google Cloud)", "https://cloud.google.com/tpu/docs/system-architecture-tpu-vm"],
+            ["Hopper architecture whitepaper (NVIDIA deep-dive)", "https://resources.nvidia.com/en-us-tensor-core"],
           ],
         },
       ],
@@ -234,7 +234,7 @@ window.ROADMAP = {
       items: [
         "Deliverable: matmul within a respectable factor of cuBLAS + step-by-step writeup",
         "Deliverable: FlashAttention-lite — fused attention on a toy problem",
-        "Deliverable: one annotated SASS reading of your own kernel",
+        "Deliverable: one annotated assembly-level reading of your own kernel (SASS or your target's equivalent)",
       ],
       links: [
         ["NVIDIA On-Demand (GTC talks)", "https://www.nvidia.com/en-us/on-demand/"],
@@ -273,28 +273,28 @@ window.ROADMAP = {
         },
         {
           id: "m56-tc",
-          title: "Tensor Cores & CUTLASS",
+          title: "Matrix / Tensor Units",
           items: [
-            "Tensor cores: WMMA → PTX mma → CUTLASS",
-            "CUTLASS + CuTe: hierarchical GEMM, custom epilogues",
-            "Async copy / TMA",
-            "Vertical vs horizontal fusion and its occupancy limits",
+            "Matrix-multiply units conceptually: tiling, accumulation, mixed precision (NVIDIA tensor cores, TPU MXU, Trainium PE array)",
+            "On NVIDIA: WMMA → PTX mma → CUTLASS / CuTe hierarchical GEMM + custom epilogues",
+            "Staging data into on-chip memory: async copy / TMA (Hopper), DMA (TPU / Trainium)",
+            "Vertical vs horizontal fusion and its occupancy / memory limits",
           ],
           links: [
-            ["CUTLASS + CuTe", "https://github.com/NVIDIA/cutlass"],
+            ["CUTLASS + CuTe (NVIDIA deep-dive)", "https://github.com/NVIDIA/cutlass"],
           ],
         },
         {
           id: "m56-sass",
-          title: "SASS & PTX",
+          title: "Assembly-level Debugging",
           items: [
-            "PTX ISA reference: mma shapes, cp.async",
-            "cuobjdump / nvdisasm for reading SASS",
-            "One annotated SASS reading of your own kernel",
+            "Why read generated assembly: confirm the compiler did what you intended — a skill that transfers across GPU, TPU, and Trainium",
+            "On NVIDIA: PTX ISA (mma shapes, cp.async) + cuobjdump / nvdisasm for SASS",
+            "One annotated low-level reading of your own kernel (SASS, or your target's equivalent)",
           ],
           links: [
             ["PTX ISA reference", "https://docs.nvidia.com/cuda/parallel-thread-execution/"],
-            ["CUDA Binary Utilities", "https://docs.nvidia.com/cuda/cuda-binary-utilities/"],
+            ["CUDA Binary Utilities (cuobjdump / nvdisasm)", "https://docs.nvidia.com/cuda/cuda-binary-utilities/"],
           ],
         },
       ],
