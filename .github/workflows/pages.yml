@@ -5,7 +5,10 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # `main` is canonical, but the auto-created github-pages environment's
+    # deployment-branch policy was pinned to this working branch when Pages
+    # was first enabled, so we trigger here too to satisfy that gate.
+    branches: [main, claude/elegant-thompson-hnlkdd]
   workflow_dispatch:
 
 permissions:
